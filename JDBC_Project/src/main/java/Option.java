@@ -1,4 +1,4 @@
-package office;
+
 
 import javax.xml.transform.Result;
 import java.sql.*;
@@ -10,7 +10,7 @@ public enum Option {
             return this.ordinal() + ".Выполнить шаги по заданию 1";
         }
 
-        void action() {
+        public void action() {
             PreparedStatement pstmtSelect = null;
             PreparedStatement pstmtUpdate = null;
             PreparedStatement pstmtCountIT = null;
@@ -79,7 +79,7 @@ public enum Option {
             return this.ordinal() + ".Добавить сотрудника";
         }
 
-        void action() {
+        public void action() {
             System.out.println("Введите его id:");
             int id=sc.nextInt();
             System.out.println("Введите его имя:");
@@ -94,7 +94,7 @@ public enum Option {
             return this.ordinal() + ".Удалить сотрудника";
         }
 
-        void action() {
+        public void action() {
             System.out.println("Введите его id:");
             int id=sc.nextInt();
             Service.removeEmployee(new Employee(id,"",0));
@@ -105,7 +105,7 @@ public enum Option {
             return this.ordinal() + ".Добавить отдел";
         }
 
-        void action() {
+        public void action() {
             System.out.println("Введите его id:");
             int id=sc.nextInt();
             System.out.println("Введите его название:");
@@ -118,7 +118,7 @@ public enum Option {
             return this.ordinal() + ".Удалить отдел";
         }
 
-        void action() {
+        public void action() {
             System.out.println("Введите его id:");
             int id=sc.nextInt();
             Service.removeDepartment(new Department(id,""));
@@ -129,7 +129,7 @@ public enum Option {
             return this.ordinal() + ".Сбросить базу данных";
         }
 
-        void action() {
+        public void action() {
             Service.createDB();
         }
 
@@ -139,7 +139,7 @@ public enum Option {
             return this.ordinal() + ".Вывести на экран все отделы";
         }
 
-        void action() {
+        public void action() {
             try(Connection con = DriverManager.getConnection("jdbc:h2:.\\Office")){
                 PreparedStatement stm = con.prepareStatement(
                         //"Select ID, NAME as txt from Department",
@@ -166,7 +166,7 @@ public enum Option {
             return this.ordinal() + ".Вывести на экран всех сотрудников";
         }
 
-        void action() {
+        public void action() {
             try(Connection con = DriverManager.getConnection("jdbc:h2:.\\Office")){
                 Statement stm = con.createStatement();
                 ResultSet rs= stm.executeQuery("Select Employee.ID, Employee.Name,Department.Name as DepName from Employee join Department on Employee.DepartmentID=Department.ID");
@@ -187,12 +187,12 @@ public enum Option {
             return this.ordinal() + ".Выход";
         }
 
-        void action() {
+        public void action() {
             System.out.println("выход");
         }
     },;
     
     Scanner sc = new Scanner(System.in);
     abstract String getText();
-    abstract void action();
+    public abstract void action();
 }

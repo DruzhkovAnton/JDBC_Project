@@ -1,4 +1,3 @@
-package office;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,18 +7,18 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Office {
-
     public static void main(String[] args) {
         Option opt=Option.AddDepartment;
         Scanner sc = new Scanner(System.in);
         Service serv = new Service();
-        
+
         while(!opt.equals(Option.EXIT)){
+            serv.createDB();
             System.out.println("Введите число:");
             for(Option o: Option.values()) System.out.println(o.getText());
-            opt=Option.values()[sc.nextInt()];    
+            opt=Option.values()[sc.nextInt()];
             opt.action();
-            serv.createDB();
-        }        
+
+        }
     }
 }
