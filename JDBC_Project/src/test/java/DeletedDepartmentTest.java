@@ -22,14 +22,22 @@ public class DeletedDepartmentTest {
 
     @Test
     public void testDeleteDeparment() throws InterruptedException {
-        int departmentIdToDelete = 2;
+        int id = 2;
         int rowEmployee2 = 0;
         int rowEmployee1 = 0;
+        //добавляем тестовый деп
+        Department Test = new Department(99, "Test");
+        Service.addDepartment(Test);
+
+        //добавляем тестового сотрудника
+        Employee test = new Employee(99,"Test", 99);
+        Service.addEmployee(test);
+
         rowEmployee1 = dbcon.areEmployeesPresent();
         // Удалите деп
-        dbcon.deleteDepartment(departmentIdToDelete);
+        System.out.println("удаляем деп");
+        Service.removeDepartment(Test);
 
-        // Подождите некоторое время для обработки
         Thread.sleep(5000);
 
         rowEmployee2 = dbcon.areEmployeesPresent();
